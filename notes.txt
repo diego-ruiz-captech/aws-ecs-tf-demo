@@ -1,0 +1,11 @@
+aws s3 mb s3://druiz-gs-test-bucket --profile gs.demo
+
+terraform init \
+        -reconfigure \
+        -backend-config="bucket=druiz-gs-test-bucket" \
+        -backend-config="key=tfstate" \
+        -backend-config="region=us-east-1" \
+        -backend-config="profile=gs.demo" \
+        ./
+terraform validate
+terraform apply
