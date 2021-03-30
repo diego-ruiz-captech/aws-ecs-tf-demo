@@ -40,19 +40,3 @@ ECS cluster
 ```
 terraform destroy
 ```
-
-## Recommended Resources
-
-- AWS Sys ops learning path - https://www.linkedin.com/learning/paths/prepare-for-aws-sysops-administrator-certification?u=2079044
-- Learning Terraform course - https://www.linkedin.com/learning/learning-terraform-2?u=2079044
-- Advanced Terraform course - https://www.linkedin.com/learning/advanced-terraform?u=2079044
-- Devops Foundations course - https://www.linkedin.com/learning/devops-foundations-your-first-project?u=2079044
-- Docker on AWS (ECS) course - https://www.linkedin.com/learning/docker-on-aws?u=2079044
-- Terraform ECS Community Module - https://registry.terraform.io/modules/terraform-aws-modules/ecs
-- Terraform ECS Community Module Example - https://github.com/terraform-aws-modules/terraform-aws-ecs/tree/master/examples/complete-ecs
-- Terraform Security Group Community Module - https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/latest
-- Terraform VPC Community Module - https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest
-- Terraform ECS Cluster resource - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster
-- Terraform ECS Service resource - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service
-- Terraform ECS Task definition resource - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition
-- AWS Cloudformation ECS Task definition container definition documentation - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html
