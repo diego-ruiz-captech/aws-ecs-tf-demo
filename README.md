@@ -2,7 +2,7 @@
 
 - [ECS, EC2, ALB Demo](ecs-ec2-alb/README.md)
 - [Simple ECS Fargate Demo](ecs-fargate/README.md)
-- [Codepipeline ECS Fargate Microservice Demo](ecs-fargate-md/README.md)
+- [Codepipeline ECS Fargate Microservice Demo](ecs-fargate-ms/README.md)
 
 ## Todo
 
