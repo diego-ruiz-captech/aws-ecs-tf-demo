@@ -20,27 +20,7 @@ resource "random_string" "password" {
   special = false
 }
 
-module "ecs_api_sg" {
-  source              = "terraform-aws-modules/security-group/aws"
-  version             = "~> 3.0"
-
-  name                = "${local.name}-ecs-api-sg"
-  description         = "Security group for ecs running tasks"
-  vpc_id              = module.vpc.vpc_id
-
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "http-8080-tcp"]
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 32768
-      to_port     = 65535
-      protocol    = "tcp"
-      description = "User-service ports"
-      cidr_blocks = "0.0.0.0/0"
-    }
-  ]
-  egress_rules        = ["all-all"]
-}
+# ----- RDS instance -----
 
 module "rds_sg" {
   source              = "terraform-aws-modules/security-group/aws"
@@ -78,6 +58,8 @@ resource "aws_db_instance" "default" {
   vpc_security_group_ids = [module.rds_sg.this_security_group_id]
 }
 
+# ----- VPC -----
+
 data "aws_availability_zones" "available" {
   state = "available"
 }
@@ -101,6 +83,8 @@ module "vpc" {
     Name        = local.name
   }
 }
+
+# ----- ssm parameters for lambda function to use -----
 
 resource "aws_ssm_parameter" "endpoint" {
   name        = "/database/${local.db_name}/endpoint"
@@ -144,6 +128,9 @@ resource "aws_ssm_parameter" "lambda_sg" {
   value       = "${module.lambda_exec_sg.this_security_group_id}"
 }
 
+
+# ----- bastion host -----
+
 module "bastion_sg" {
   source              = "terraform-aws-modules/security-group/aws"
   version             = "~> 3.0"
@@ -154,29 +141,6 @@ module "bastion_sg" {
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp"]
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 32768
-      to_port     = 65535
-      protocol    = "tcp"
-      description = "User-service ports"
-      cidr_blocks = "0.0.0.0/0"
-    }
-  ]
-  egress_rules        = ["all-all"]
-}
-
-module "lambda_exec_sg" {
-  source              = "terraform-aws-modules/security-group/aws"
-  version             = "~> 3.0"
-
-  name                = "${local.name}-lambda-exec-role"
-  description         = "Security group for lambda exe"
-  vpc_id              = module.vpc.vpc_id
-
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-#   ingress_rules       = ["all-all"]
-  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "mysql-tcp"]
   ingress_with_cidr_blocks = [
     {
       from_port   = 32768
@@ -212,7 +176,6 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-# ----- Bastion ---------
 module "ec2-instance" {
   
   source                  = "terraform-aws-modules/ec2-instance/aws"
@@ -267,35 +230,26 @@ resource "local_file" "bastion_key" {
     file_permission = "0600"
 }
 
-# Proof of concept that terraform can create lambda functions too
+# -----  lambda function security group -----
+module "lambda_exec_sg" {
+  source              = "terraform-aws-modules/security-group/aws"
+  version             = "~> 3.0"
 
-resource "aws_iam_role" "iam_for_lambda" {
-  name = "iam_for_lambda"
+  name                = "${local.name}-lambda-exec-role"
+  description         = "Security group for lambda exe"
+  vpc_id              = module.vpc.vpc_id
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+#   ingress_rules       = ["all-all"]
+  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp", "mysql-tcp"]
+  ingress_with_cidr_blocks = [
     {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
+      from_port   = 32768
+      to_port     = 65535
+      protocol    = "tcp"
+      description = "User-service ports"
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
-}
-EOF
-}
-
-resource "aws_lambda_function" "test_lambda" {
-  #filename      = "lambda_function_payload.zip"
-  function_name = "${local.name}-terraform-lambda-example"
-  role          = aws_iam_role.iam_for_lambda.arn
-  
-  image_uri = "amazon/aws-lambda-nodejs"
-  runtime = "nodejs12.x"
-
-  
+  egress_rules        = ["all-all"]
 }
