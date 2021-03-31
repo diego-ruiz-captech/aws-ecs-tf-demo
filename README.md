@@ -44,3 +44,7 @@
 - Terraform Codedeploy group - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codedeploy_deployment_group
 - Good terraform example (ecs, codepipeline, etc.) - https://github.com/gnokoheat/ecs-with-codepipeline-example-by-terraform
 - Codepipeline ECS Blue+Green deployment documentation - https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-ECSbluegreen.html
+- Terraform + Serverless integration - https://www.serverless.com/blog/definitive-guide-terraform-serverless
+- Terraform + Serverless repo example - https://github.com/chief-wizard/serverless-terraform-example
+- Lambda to RDS connection - https://docs.aws.amazon.com/lambda/latest/dg/services-rds-tutorial.html#vpc-rds-create-iam-role
+- Serverless AWS workflow - https://www.serverless.com/framework/docs/providers/aws/guide/workflow/

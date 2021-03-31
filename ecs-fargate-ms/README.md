@@ -1,4 +1,4 @@
-# Simple ECS + Fargate Demo
+# Microservice + ECS + Codepipeline Demo
 
 Related api repository: https://github.com/diego-ruiz-captech/api-demo-app
 
