@@ -48,3 +48,7 @@
 - Terraform + Serverless repo example - https://github.com/chief-wizard/serverless-terraform-example
 - Lambda to RDS connection - https://docs.aws.amazon.com/lambda/latest/dg/services-rds-tutorial.html#vpc-rds-create-iam-role
 - Serverless AWS workflow - https://www.serverless.com/framework/docs/providers/aws/guide/workflow/
+- Terraform at scale best practices - https://www.youtube.com/watch?v=9c0s93GcXVw
+- Terraform + Open Policy Agent (Sentinel alternative since it requires paid terraform) - https://www.openpolicyagent.org/docs/latest/terraform/
+- Atlantis (Terraform PR Automation) - https://www.runatlantis.io/
+- Terraform + Atlantis + OPA blog post - https://marcyoung.us/post/atlantis-opa/

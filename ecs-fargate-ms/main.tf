@@ -104,3 +104,18 @@ module "api1_ecs" {
   github_repo = local.github_repo
   github_branch = local.github_branch
 }
+
+module "api2_ecs" {
+  source = "./api-demo"
+
+  name = "${local.name}-api2"
+  cluster_name = module.ecs.this_ecs_cluster_name
+  cluster_id = module.ecs.this_ecs_cluster_id
+  cluster_sg = [module.ecs_api_sg.this_security_group_id]
+  cluster_subnets = module.vpc.public_subnets
+  vpc_id = module.vpc.vpc_id
+  github_token = var.github_token
+  github_owner = local.github_owner
+  github_repo = local.github_repo
+  github_branch = local.github_branch
+}
