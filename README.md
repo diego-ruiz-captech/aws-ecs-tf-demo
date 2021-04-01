@@ -52,3 +52,4 @@
 - Terraform + Open Policy Agent (Sentinel alternative since it requires paid terraform) - https://www.openpolicyagent.org/docs/latest/terraform/
 - Atlantis (Terraform PR Automation) - https://www.runatlantis.io/
 - Terraform + Atlantis + OPA blog post - https://marcyoung.us/post/atlantis-opa/
+- Sample OPA policies - https://github.com/Scalr/sample-tf-opa-policies
