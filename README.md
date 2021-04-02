@@ -11,6 +11,7 @@
 - Ensure ecs containers can communicate with each other
 - Review and tune with security best practices
 - ~~Link up with CI/CD resources for ECS deployments~~
+- Logging/Monitoring
 - Submit demos to aws terraform ecs community module (they're still lacking fully fleshed out [examples](https://github.com/terraform-aws-modules/terraform-aws-ecs/tree/master/examples/complete-ecs))
 
 ## Recommended Resources
