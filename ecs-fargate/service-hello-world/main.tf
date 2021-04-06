@@ -13,7 +13,8 @@ resource "aws_ecs_task_definition" "hello_world" {
   cpu = 512
   memory = 1024
   network_mode = "awsvpc"
-  #execution_role_arn       = "${data.aws_iam_role.ecs_task_execution_role.arn}"
+  task_role_arn            = var.task_exec_role_arn
+  execution_role_arn       = var.task_exec_role_arn
   container_definitions = <<EOF
 [
   {
