@@ -55,3 +55,4 @@
 - Atlantis (Terraform PR Automation) - https://www.runatlantis.io/
 - Terraform + Atlantis + OPA blog post - https://marcyoung.us/post/atlantis-opa/
 - Sample OPA policies - https://github.com/Scalr/sample-tf-opa-policies
+- Gitlab CI/CD Runner (Docker) - https://docs.gitlab.com/runner/install/docker.html#install-the-docker-image-and-start-the-container
