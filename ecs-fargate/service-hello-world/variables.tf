@@ -17,3 +17,8 @@ variable "task_exec_role_arn" {
   description = "The arn for the custom task exececution role"
   type        = string
 }
+
+variable "hello_dbpass_arn" {
+  description = "The arn for the db password in ssm"
+  type        = string
+}

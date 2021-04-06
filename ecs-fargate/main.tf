@@ -37,7 +37,7 @@ resource "aws_iam_policy" "ecs-secrets-manager-policy" {
           "secretsmanager:DescribeSecret",
           "secretsmanager:ListSecretVersionIds"
         ]
-        Resource = "${aws_secretsmanager_secret.hello-world-dbpass}"
+        Resource = aws_secretsmanager_secret.hello-world-dbpass.arn
       }
     ]
   })
@@ -205,4 +205,5 @@ module "hello_world" {
   cluster_sg = [module.security_group.this_security_group_id]
   cluster_subnets = module.vpc.public_subnets
   task_exec_role_arn = aws_iam_role.ecs-task-exec-role.arn
+  hello_dbpass_arn = aws_secretsmanager_secret.hello-world-dbpass.arn
 }
