@@ -31,7 +31,7 @@ resource "aws_ecs_task_definition" "hello_world" {
       secrets= [
         {
           name = "HELLO_DB_PASS",
-          value = var.hello_dbpass_arn
+          valueFrom = var.hello_dbpass_arn
         }
       ]
     }
